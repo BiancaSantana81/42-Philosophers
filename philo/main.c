@@ -6,11 +6,11 @@
 /*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:58:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/01 14:01:08 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:25:57 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
 int	main(void)
 {
