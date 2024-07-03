@@ -6,13 +6,13 @@
 /*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:58:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/02 17:25:57 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/03 17:07:20 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	printf("HELLO JANTAR FILOSÓFICO :)\n");
+	return (0);
 }
