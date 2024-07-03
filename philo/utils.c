@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/03 18:00:00 by bsantana         ###   ########.fr       */
+/*   Created: 2024/07/03 17:57:48 by bsantana          #+#    #+#             */
+/*   Updated: 2024/07/03 18:01:23 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-/* LIBRARIES */
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <limits.h>
-# include <pthread.h>
-# include <sys/time.h>
-
-void	input_error(char *string);
-
-#endif
+void	input_error(char *string)
+{
+	printf("Error: %s", string);
+}

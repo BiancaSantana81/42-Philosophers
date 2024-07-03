@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:58:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/03 17:07:20 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:00:37 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 
 int	main(int argc, char **argv)
 {
+	(void)argv;
+	if (argc == 5 || argc == 6)
+	{
+		printf("tem a quantidade de argumentos válida.\n");
+	}
+	else
+		input_error("Digite o input corretamente.");
 	return (0);
 }
