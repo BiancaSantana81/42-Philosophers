@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:33:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/04 12:38:18 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/04 12:44:53 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int aux_check_input(int number, int argc, int i)
 	if (number == 0 && !(argc == 6 && i == 5))
     {
         error_message("Really? How do you expect our dinner to be worth zero?");
-        return 1;
+        return (1);
     }
 	if (number < INT_MIN || number > INT_MAX)
 	{
@@ -51,14 +51,6 @@ int aux_check_input(int number, int argc, int i)
 		return (1);
 	}
 	return (0);
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	else
-		return (0);
 }
 
 int is_number(char *input)
@@ -77,6 +69,14 @@ int is_number(char *input)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+		return (0);
 }
 
 long int	ft_atol(const char *nptr)
