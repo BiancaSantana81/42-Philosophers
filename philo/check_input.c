@@ -6,13 +6,13 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:33:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/04 15:57:42 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/04 16:47:00 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	prepare_dinner_table(t_table *table, long int number, int index)
+static void	everything_on_the_table(t_table *table, long int number, int index)
 {
 	if (index == 1)
 		table->philo_nbr = number;
@@ -26,7 +26,7 @@ static void	prepare_dinner_table(t_table *table, long int number, int index)
 		table->nbr_limits_mails = number;
 }
 
-int check_input(int argc, char **input, t_table *table)
+void prepare_dinner_table(int argc, char **input, t_table *table)
 {
 	long int number;
 	int i;
@@ -35,37 +35,17 @@ int check_input(int argc, char **input, t_table *table)
 	while (i < argc)
 	{
 		if (is_number(input[i]) != 0)
-		{
-			error_message("Enter only numeric values.");
-			return (1);
-		}
+			error_message("Enter only numeric values.", table);
 		number = ft_atol(input[i]);
-		if (aux_check_input(number, argc, i) != 0)
-			return (1);
-		prepare_dinner_table(table, number, i);
+		if (number < 0)
+			error_message("No negativity at our dinner party, okay?", table);
+		if (number == 0 && !(argc == 6 && i == 5))
+        	error_message("Really? How do you expect our dinner to be worth zero?", table);
+		if (number > INT_MAX)
+			error_message("The amount entered is very high.", table);
+		everything_on_the_table(table, number, i);
 		i++;
 	}
-	return (0);
-}
-
-int aux_check_input(long int number, int argc, int i)
-{
-	if (number < 0)
-	{
-		error_message("No negativity at our dinner party, okay?");
-		return (1);
-	}
-	if (number == 0 && !(argc == 6 && i == 5))
-    {
-        error_message("Really? How do you expect our dinner to be worth zero?");
-        return (1);
-    }
-	if (number < INT_MIN || number > INT_MAX)
-	{
-		error_message("The amount entered is very high.");
-		return (1);
-	}
-	return (0);
 }
 
 int is_number(char *input)

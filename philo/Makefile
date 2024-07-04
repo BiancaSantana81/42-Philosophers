@@ -6,7 +6,7 @@
 #    By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/01 13:31:36 by bsantana          #+#    #+#              #
-#    Updated: 2024/07/04 16:07:01 by bsantana         ###   ########.fr        #
+#    Updated: 2024/07/04 16:45:01 by bsantana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,12 +58,14 @@ fclean: clean
 
 re: fclean all
 
+val: ARGS=""
 val:
 	@$(MAKE) re
-	@valgrind $(VALGRIND_FLAGS) ./$(NAME)
+	@valgrind $(VALGRIND_FLAGS) ./$(NAME) $(ARGS)
 
+hel: ARGS=""
 hel:
 	@$(MAKE) re
-	@valgrind $(HELGRIND_FLAGS) ./$(NAME)
+	@valgrind $(HELGRIND_FLAGS) ./$(NAME) $(ARGS)
 
 .PHONY: all clean fclean re

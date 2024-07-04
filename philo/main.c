@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:58:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/04 16:10:11 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/04 16:36:50 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,11 @@ int	main(int argc, char **argv)
         return (1);
 	if (argc == 5 || argc == 6)
 	{
-		if (check_input(argc, argv, table) != 0)
-		{
-			free(table);
-			return (1);
-		}
+		prepare_dinner_table(argc, argv, table);
 		print_table(table);
 	}
 	else
-	{
-		error_message("Insert five or six arguments for our dinner party.");
-		free(table);
-		return (1);
-	}
+		error_message("Insert five or six arguments for our dinner party.", table);
 	free(table);
 	return (0);
 }
