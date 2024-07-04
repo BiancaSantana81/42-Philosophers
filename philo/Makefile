@@ -6,7 +6,7 @@
 #    By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/01 13:31:36 by bsantana          #+#    #+#              #
-#    Updated: 2024/07/04 16:45:01 by bsantana         ###   ########.fr        #
+#    Updated: 2024/07/04 16:59:33 by bsantana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,9 @@ $(OBJ_PATH)/%.o: %.c | $(OBJ_PATH)
 
 $(NAME): $(OBJS)
 	@$(CC) $(OBJS) -o $(NAME)
-	@echo "$(GREEN)------------------------------  "
-	@echo "$(WHITE) 🍽️  The dinner was served 🍽️"
-	@echo "$(GREEN)------------------------------  "
+	@echo "$(GREEN)------------------------------------------------  "
+	@echo "$(WHITE) 🍽️  Are you ready for our philosophical dinner? 🍽️"
+	@echo "$(GREEN)------------------------------------------------  "
 
 clean:
 	@rm -rf $(OBJS)

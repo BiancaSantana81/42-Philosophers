@@ -6,24 +6,34 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:33:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/04 16:47:00 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:57:13 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// Convertendo milissegundos para microssegundos nas multiplicações
 static void	everything_on_the_table(t_table *table, long int number, int index)
 {
 	if (index == 1)
 		table->philo_nbr = number;
-	else if (index == 2)
-		table->time_to_die = number;
-	else if (index == 3)
-		table->time_to_eat = number;
-	else if (index == 4)
-		table->time_to_sleep = number;
 	else if (index == 5)
 		table->nbr_limits_mails = number;
+	else
+	{
+		if (number < 60)
+            error_message("Our philosophical dinner doesn't need to be so fast. Don't you think?", table);
+        number *= 1000;
+        if (index == 2)
+            table->time_to_die = number;
+        else if (index == 3)
+            table->time_to_eat = number;
+        else if (index == 4)
+            table->time_to_sleep = number;
+	}
+	if (table->philo_nbr > 200)
+		error_message("Dammit! Do you really want more than 200 threads running at the same time?", table);
+		
 }
 
 void prepare_dinner_table(int argc, char **input, t_table *table)
