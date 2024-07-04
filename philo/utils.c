@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:57:48 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/03 18:01:23 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/04 12:35:23 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	input_error(char *string)
+void	error_message(char *string)
 {
-	printf("Error: %s", string);
+	printf(RED"🚨 "WHITE"%s"RED" 🚨\n"RST, string);
 }
