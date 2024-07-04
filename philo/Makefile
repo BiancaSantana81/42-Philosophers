@@ -6,7 +6,7 @@
 #    By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/01 13:31:36 by bsantana          #+#    #+#              #
-#    Updated: 2024/07/04 12:37:37 by bsantana         ###   ########.fr        #
+#    Updated: 2024/07/04 16:07:01 by bsantana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,13 +18,15 @@ BOLD := \033[1;33m
 NAME := philo
 CFLAGS := -Wextra -Wall -Werror -g3
 MAKEFLAGS += --silent
+VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes
+HELGRIND_FLAGS := --tool=helgrind
 
 # PATHS
 CC := cc
 OBJ_PATH := objects
 
 # SOURCES
-CFILES := main.c utils.c check_input.c
+CFILES := trash.c main.c utils.c check_input.c
 OBJS := $(addprefix $(OBJ_PATH)/, $(notdir $(CFILES:.c=.o)))
 
 all: $(OBJ_PATH) $(NAME)
@@ -55,5 +57,13 @@ fclean: clean
 	@echo "                                     "
 
 re: fclean all
+
+val:
+	@$(MAKE) re
+	@valgrind $(VALGRIND_FLAGS) ./$(NAME)
+
+hel:
+	@$(MAKE) re
+	@valgrind $(HELGRIND_FLAGS) ./$(NAME)
 
 .PHONY: all clean fclean re
