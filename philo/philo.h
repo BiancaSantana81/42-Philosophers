@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/05 10:48:29 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/05 11:55:27 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ void		prepare_dinner_table(int argc, char **input, t_table *table);
 int			ft_isdigit(int c);
 int			is_number(char *input);
 long int	ft_atol(const char *nptr);
+
+/* ==== INIT ==== */
+void		*allocate_memory(int bytes);
+void		data_init(t_table *table);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);

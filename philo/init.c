@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/01 13:58:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/05 16:47:22 by bsantana         ###   ########.fr       */
+/*   Created: 2024/07/05 11:27:18 by bsantana          #+#    #+#             */
+/*   Updated: 2024/07/05 11:53:21 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
-{	
-	t_table	*table;
+void	data_init(t_table *table)
+{
+	table->philos = allocate_memory(sizeof (t_philo) * table->philo_nbr);
+	table->forks = allocate_memory(sizeof (t_philo) * table->philo_nbr);
+	// table->start_simulation = 
+	// table->end_simulation =
+}
 
-	table = malloc(sizeof(t_table));
-	if (!table)
-		return (1);
-	if (argc == 5 || argc == 6)
-	{
-		prepare_dinner_table(argc, argv, table);
-		data_init(table);
-		print_table(table);
-	}
-	else
-		error_message("Insert five or six arguments.", table);
-	free(table);
-	return (0);
+void	*allocate_memory(int bytes)
+{
+	void	*memory;
+
+	memory = malloc(bytes);
+	if (!memory)
+		return (NULL);
+	return (memory);
 }

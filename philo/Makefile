@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+         #
+#    By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/01 13:31:36 by bsantana          #+#    #+#              #
-#    Updated: 2024/07/04 16:59:33 by bsantana         ###   ########.fr        #
+#    Updated: 2024/07/05 11:54:48 by bsantana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CC := cc
 OBJ_PATH := objects
 
 # SOURCES
-CFILES := trash.c main.c utils.c check_input.c
+CFILES := trash.c main.c utils.c check_input.c init.c
 OBJS := $(addprefix $(OBJ_PATH)/, $(notdir $(CFILES:.c=.o)))
 
 all: $(OBJ_PATH) $(NAME)
