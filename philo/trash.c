@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   trash.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/05 10:30:55 by bsantana          #+#    #+#             */
+/*   Updated: 2024/07/05 10:31:07 by bsantana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
 #include "philo.h"
 
-void print_table(t_table *table)
+void    print_table(t_table *table)
 {
     printf("Number of philosophers: %d\n", table->philo_nbr);
     printf("Time to die: %ld\n", table->time_to_die);

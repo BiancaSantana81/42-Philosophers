@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:33:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/04 18:02:01 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/05 10:43:58 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,23 @@ static void	everything_on_the_table(t_table *table, long int number, int index)
 	else
 	{
 		if (number < 60)
-            error_message("Our philosophical dinner doesn't need to be so fast. Don't you think?", table);
-        number *= 1000;
-        if (index == 2)
-            table->time_to_die = number;
-        else if (index == 3)
-            table->time_to_eat = number;
-        else if (index == 4)
-            table->time_to_sleep = number;
+			error_message("Our dinner doesn't need to be so fast!", table);
+		number *= 1000;
+		if (index == 2)
+			table->time_to_die = number;
+		else if (index == 3)
+			table->time_to_eat = number;
+		else if (index == 4)
+			table->time_to_sleep = number;
 	}
 	if (table->philo_nbr > 200)
-		error_message("Dammit! Do you really want more than 200 threads running at the same time?", table);
-		
+		error_message("Dammit! Do you want over 200 threads running?", table);
 }
 
-void prepare_dinner_table(int argc, char **input, t_table *table)
+void	prepare_dinner_table(int argc, char **input, t_table *table)
 {
-	long int number;
-	int i;
+	long int	number;
+	int			i;
 
 	i = 1;
 	while (i < argc)
@@ -50,7 +49,7 @@ void prepare_dinner_table(int argc, char **input, t_table *table)
 		if (number < 0)
 			error_message("No negativity at our dinner party, okay?", table);
 		if (number == 0 && !(argc == 6 && i == 5))
-        	error_message("Really? How do you expect our dinner to be worth zero?", table);
+			error_message("How do you expect our dinner to be free?", table);
 		if (number > INT_MAX)
 			error_message("The amount entered is very high.", table);
 		everything_on_the_table(table, number, i);
@@ -58,15 +57,15 @@ void prepare_dinner_table(int argc, char **input, t_table *table)
 	}
 }
 
-int is_number(char *input)
+int	is_number(char *input)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (input[0] == '+' || input[0] == '-')
 		i++;
 	if (input[i] == '\0')
-        return (1);
+		return (1);
 	while (input[i])
 	{
 		while ((input[i] >= 9 && input[i] <= 13) || input[i] == 32)
