@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:58:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/05 16:47:22 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/07 16:57:19 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 	{
 		prepare_dinner_table(argc, argv, table);
-		data_init(table);
 		print_table(table);
 	}
 	else

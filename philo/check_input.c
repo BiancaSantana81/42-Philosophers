@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
+/*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:33:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/05 10:43:58 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/07 16:57:25 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	prepare_dinner_table(int argc, char **input, t_table *table)
 		everything_on_the_table(table, number, i);
 		i++;
 	}
+	data_init(table);
 }
 
 int	is_number(char *input)
