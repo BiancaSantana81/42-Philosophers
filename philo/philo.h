@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 15:49:03 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:26:00 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int			is_number(char *input);
 long int	ft_atol(const char *nptr);
 
 /* ==== INIT DATA ==== */
-void		*allocate_memory(int bytes);
 void		data_init(t_table *table);
 void		init_philo(t_table *table);
 void		assign_forks(t_philo *philo, t_fork *forks, int philo_position);
@@ -86,6 +85,8 @@ void		*routine(void *arg);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);
+void		*allocate_memory(int bytes);
+void		free_everything(t_table *table);
 
 /* ==== TRASH ==== */
 void		print_table(t_table *table);

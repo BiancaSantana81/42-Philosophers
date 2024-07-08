@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   0.philosophers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:58:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 11:18:10 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:26:34 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		error_message("Insert five or six arguments.", table);
-	free(table);
+	free_everything(table);
 	return (0);
 }
