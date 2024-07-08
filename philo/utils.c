@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:57:48 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 16:25:29 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:45:06 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	error_message(char *string, t_table *table)
 {
 	printf(RED"🚨 "WHITE"%s"RED" 🚨\n"RST, string);
-	free(table);
+	free_everything(table);
 	exit(1);
 }
 

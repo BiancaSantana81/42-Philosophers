@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 16:26:00 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:49:29 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@
 # define RST "\033[0m"
 # define RED "\033[1;31m"
 # define WHITE "\033[1;37m"
+
+/* PRINT MESSAGES */
+# define THINK "Philosopher %d %ld is thinking... 💡\n"
+# define GET_FORK "Philosopher %d %ld has taken a fork... 🍴"
+# define DEATH "💀 Philosopher %d %ld has died! 💀"
+# define SLEEP "Philosopher %d %ld is sleeping... 💤💤"
+# define EAT "Philosopher %d %ld is eating... 😋"
 
 typedef pthread_mutex_t	t_mtx;
 typedef struct s_philo	t_philo;
@@ -82,6 +89,7 @@ void		assign_forks(t_philo *philo, t_fork *forks, int philo_position);
 void		dinner_start(t_table *table);
 void		*control(void *null);
 void		*routine(void *arg);
+void		lonely_dinner(void);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);
