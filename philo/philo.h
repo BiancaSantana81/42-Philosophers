@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 18:49:29 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:12:56 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void		lonely_dinner(void);
 void		error_message(char *string, t_table *table);
 void		*allocate_memory(int bytes);
 void		free_everything(t_table *table);
+void		set_table(t_table *new_table);
+t_table		*get_table(void);
 
 /* ==== TRASH ==== */
 void		print_table(t_table *table);

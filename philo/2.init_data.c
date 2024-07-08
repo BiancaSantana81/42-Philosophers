@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_data.c                                        :+:      :+:    :+:   */
+/*   2.init_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:27:18 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 14:45:34 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:41:57 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void data_init(t_table *table)
     table->end_simulation = false;
     table->philos = allocate_memory(sizeof(t_philo) * table->philo_nbr);
     table->forks = allocate_memory(sizeof(t_fork) * table->philo_nbr);
-	pthread_mutex_init(&table->table_mutex, NULL);
     while (i < table->philo_nbr)
     {
-        pthread_mutex_init(&table->forks[i].fork, NULL);
+        if (pthread_mutex_init(&table->forks[i].fork, NULL) != 0)
+			error_message("Error initializing mutex.", table);
         table->forks[i].id = i;
         i++;
     }

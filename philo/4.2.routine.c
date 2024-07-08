@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 18:50:09 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:20:18 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ void lonely_dinner(void)
 
 void *routine(void *arg)
 {
-    t_table *table;
+    t_table table;
    
-    (void)table;
-    table = (t_table *)arg;
-    // if (table->philo_nbr == 1)
-    //     lonely_dinner();
+    (void)arg;
+    table = *get_table();
+    if (table.philo_nbr == 1)
+        lonely_dinner();
+    while (!table.end_simulation)
+    {
+        printf("o jantar continua rolando...\n");
+    }
     // Enquanto não chegar o fim da simulação
         // Pensar
         // Pegar garfos
