@@ -6,26 +6,28 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:27:18 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/07 17:06:14 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:45:34 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	data_init(t_table *table)
+void data_init(t_table *table)
 {
-	int	i;
+    int i;
 
-	i = -1;
-	table->end_simulation = false;
-	table->philos = allocate_memory(sizeof (t_philo) * table->philo_nbr);
-	table->forks = allocate_memory(sizeof (t_fork) * table->philo_nbr);
-	while (i++ >= table->philo_nbr)
-	{
-		pthread_mutex_init(&table->forks[i].fork, NULL);
-		table->forks[i].id = i;
-	}
-	init_philo(table);
+    i = 0;
+    table->end_simulation = false;
+    table->philos = allocate_memory(sizeof(t_philo) * table->philo_nbr);
+    table->forks = allocate_memory(sizeof(t_fork) * table->philo_nbr);
+	pthread_mutex_init(&table->table_mutex, NULL);
+    while (i < table->philo_nbr)
+    {
+        pthread_mutex_init(&table->forks[i].fork, NULL);
+        table->forks[i].id = i;
+        i++;
+    }
+    init_philo(table);
 }
 
 void	init_philo(t_table *table)
@@ -33,8 +35,8 @@ void	init_philo(t_table *table)
 	t_philo	*philo;
 	int	i;
 
-	i = -1;
-	while (i++ < table->philo_nbr)
+	i = 0;
+	while (i < table->philo_nbr)
 	{
 		philo = table->philos + i;
 		philo->id = i + 1;
@@ -42,6 +44,7 @@ void	init_philo(t_table *table)
 		philo->meals_counter = 0;
 		philo->table = table;
 		assign_forks(philo, table->forks, i);
+		i++;
 	}
 }
 

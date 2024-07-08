@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/07 17:03:43 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:38:50 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_table
 	long	nbr_limits_mails;
 	long	start_simulation;
 	bool	end_simulation;
+	struct	timeval start_time;
+	t_mtx	table_mutex;
 	t_philo	*philos;
 	t_fork	*forks;
 }	t_table;
@@ -76,6 +78,10 @@ void		*allocate_memory(int bytes);
 void		data_init(t_table *table);
 void		init_philo(t_table *table);
 void		assign_forks(t_philo *philo, t_fork *forks, int philo_position);
+
+/* ==== DINNER ==== */
+void		dinner_start(t_table *table);
+
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);
