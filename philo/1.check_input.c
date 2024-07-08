@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_input.c                                      :+:      :+:    :+:   */
+/*   1.check_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:33:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/07 16:57:25 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:58:18 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// Convertendo milissegundos para microssegundos nas multiplicações
 static void	everything_on_the_table(t_table *table, long int number, int index)
 {
 	if (index == 1)
