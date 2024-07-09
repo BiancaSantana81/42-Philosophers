@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:27:18 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 14:33:15 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 15:30:40 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void data_init(t_table *table)
         table->forks[i].id = i;
         i++;
     }
+	if (pthread_mutex_init(&table->print, NULL) != 0)
+        error_message("Error initializing print mutex.", table);
     init_philo(table);
 }
 

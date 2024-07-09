@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 15:12:12 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:41:07 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ void    *lonely_dinner(void)
     table = *get_table();
     take_forks(table.philos);
     usleep(table.time_to_die);
-    printf(DEATH, table.philos->thread_id, table.philos->id);
+    print_message(table.philos, DEATH);
     return (NULL);
 }
 
 void *routine(void *arg)
 {
-    t_table table;
+    t_philo *philo = (t_philo *)arg;
+    t_table *table = philo->table;
 
-    (void)arg;
-    table = *get_table();
-    if (table.philo_nbr == 1)
-        return(lonely_dinner());
-    while (!(table.end_simulation))
+    if (table->philo_nbr == 1)
+        return (lonely_dinner());
+    while (!(table->end_simulation))
     {
-        philo_sleep(table.philos);
-        take_forks(table.philos);
+        take_forks(philo);
+        philo_eating(philo);
+        philo_sleep(philo);
+        philo_thinking(philo);
     }
     return (NULL);
 }
-

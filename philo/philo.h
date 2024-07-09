@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 14:58:13 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 16:30:07 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@
 # define WHITE "\033[1;37m"
 
 /* PRINT MESSAGES */
-# define THINK "[%ld] %d is thinking... 💡\n"
+# define THINK "[%ld] %d is thinking.💡\n"
 # define P_FORK_ONE  "[%ld] %d has taken the first fork.🍴\n"
 # define P_FORK_TWO "[%ld] %d has taken the second fork.🍴\n"
 # define D_FORK_ONE "[%ld] %d has put down the first fork.🍴\n"
 # define D_FORK_TWO "[%ld] %d has put down the second fork.🍴\n"
 # define DEATH  RED"💀 [%ld] %d has died! 💀"RST
-# define SLEEP "[%ld] %d is sleeping... 💤💤\n"
-# define EAT "[%ld] %d is eating... 😋"
+# define SLEEP "[%ld] %d is sleeping. 💤\n"
+# define EAT "[%ld] %d is eating. 🍔\n"
 
 typedef pthread_mutex_t	t_mtx;
 typedef struct s_philo	t_philo;
@@ -59,6 +59,7 @@ typedef struct s_table
 	long	start_simulation;
 	bool	end_simulation;
 	struct	timeval start_time;
+	pthread_mutex_t	print;
 	t_mtx	table_mutex;
 	t_philo	*philos;
 	t_fork	*forks;
@@ -98,6 +99,8 @@ void		*lonely_dinner(void);
 void	take_forks(t_philo *philo);
 void    down_forks(t_philo *philo);
 void	philo_sleep(t_philo *philo);
+void    philo_eating(t_philo *philo);
+void	philo_thinking(t_philo *philo);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);
@@ -105,6 +108,7 @@ void		*allocate_memory(int bytes);
 void		free_everything(t_table *table);
 void		set_table(t_table *new_table);
 t_table		*get_table(void);
+void		print_message(t_philo *philo, const char *message);
 
 /* ==== TRASH ==== */
 void		print_table(t_table *table);
