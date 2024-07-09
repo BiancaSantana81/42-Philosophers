@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 17:31:15 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:37:22 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,17 @@ void *routine(void *arg)
     while (!(table.end_simulation))
     {
         take_forks(philo);
+        if (table.end_simulation == true)
+            break ;
         philo_eating(philo);
+        if (table.end_simulation == true)
+            break ;
         philo_sleep(philo);
+        if (table.end_simulation == true)
+            break ;
         philo_thinking(philo);
+        if (table.end_simulation == true)
+            break ;
     }
     return (NULL);
 }
