@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:46:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 18:40:13 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:05:32 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,14 @@ void *control(void *null)
 
     table = get_table();
     //philo = table.philos;
-    i = 0;
-    while (i < table->philo_nbr)
+    i = -1;
+    while (table->end_simulation == false)
     {
-        if (table->nbr_limits_mails > 0)
-            philo_satisfied();
+        while (i++ < table->philo_nbr)
+        {
+            if (table->nbr_limits_mails > 0)
+                philo_satisfied();
+        }    
     }
     return (NULL);
 }
