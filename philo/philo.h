@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 16:30:07 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:09:13 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_table
 	long	nbr_limits_mails;
 	long	start_simulation;
 	bool	end_simulation;
-	struct	timeval start_time;
+	long	start_time;
 	pthread_mutex_t	print;
 	t_mtx	table_mutex;
 	t_philo	*philos;
@@ -101,6 +101,10 @@ void    down_forks(t_philo *philo);
 void	philo_sleep(t_philo *philo);
 void    philo_eating(t_philo *philo);
 void	philo_thinking(t_philo *philo);
+
+/* ==== TIME ==== */
+long 	get_time();
+long	get_elapsed_time(long start_time);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);

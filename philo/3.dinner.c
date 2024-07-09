@@ -44,7 +44,7 @@ void    dinner_start(t_table *table)
 {
     pthread_t   controller;
 
-    gettimeofday(&table->start_time, NULL);
+    table->start_time = get_time();
     if (table->nbr_limits_mails == 0)
         return ;
     create_threads(table);

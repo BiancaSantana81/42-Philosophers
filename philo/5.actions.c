@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:21:12 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 16:36:27 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:13:16 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void take_forks(t_philo *philo)
 void    down_forks(t_philo *philo)
 {
     pthread_mutex_unlock(&philo->first_fork->fork);
-    print_message(philo, D_FORK_ONE);
     pthread_mutex_unlock(&philo->second_fork->fork);
-    print_message(philo, D_FORK_TWO);
 }
 
 void philo_sleep(t_philo *philo)
@@ -43,7 +41,8 @@ void    philo_eating(t_philo *philo)
     if (!table->end_simulation)
     {
         print_message(philo, EAT);
-        philo->meals_counter++;   
+        philo->meals_counter++;
+        usleep(table->time_to_eat);  
         down_forks(philo);
     }
 }
