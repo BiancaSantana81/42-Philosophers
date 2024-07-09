@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 16:41:07 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:31:15 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,14 @@ void    *lonely_dinner(void)
 
 void *routine(void *arg)
 {
-    t_philo *philo = (t_philo *)arg;
-    t_table *table = philo->table;
+    t_table table;
+    t_philo *philo;
 
-    if (table->philo_nbr == 1)
+    table = *get_table();
+    philo = (t_philo *)arg;
+    if (table.end_simulation == 1)
         return (lonely_dinner());
-    while (!(table->end_simulation))
+    while (!(table.end_simulation))
     {
         take_forks(philo);
         philo_eating(philo);

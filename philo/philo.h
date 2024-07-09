@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 17:09:13 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 17:20:14 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ typedef struct s_table
 	long	time_to_eat;
 	long	time_to_sleep;
 	long	nbr_limits_mails;
-	long	start_simulation;
-	bool	end_simulation;
 	long	start_time;
+	bool	end_simulation;
 	pthread_mutex_t	print;
 	t_mtx	table_mutex;
 	t_philo	*philos;
