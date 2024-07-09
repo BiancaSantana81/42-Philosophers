@@ -22,7 +22,7 @@ static void    create_threads(t_table *table)
     i = 0;
     while (i < table->philo_nbr)
     {
-        if (pthread_create(&table->philos[i].thread_id, NULL, routine, &table->philos[i]) != 0)
+        if (pthread_create(&table->philos[i].thread_id, NULL, routine, (void *)&table->philos[i]) != 0)
             error_message("Error creating thread.", table);
         i++;
     }

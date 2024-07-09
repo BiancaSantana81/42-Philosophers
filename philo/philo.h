@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 11:46:09 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:58:13 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # define D_FORK_ONE "[%ld] %d has put down the first fork.🍴\n"
 # define D_FORK_TWO "[%ld] %d has put down the second fork.🍴\n"
 # define DEATH  RED"💀 [%ld] %d has died! 💀"RST
-# define SLEEP "[%ld] %d is sleeping... 💤💤"
+# define SLEEP "[%ld] %d is sleeping... 💤💤\n"
 # define EAT "[%ld] %d is eating... 😋"
 
 typedef pthread_mutex_t	t_mtx;
@@ -92,11 +92,12 @@ void		assign_forks(t_philo *philo, t_fork *forks, int philo_position);
 void		dinner_start(t_table *table);
 void		*control(void *null);
 void		*routine(void *arg);
-void		lonely_dinner(void);
+void		*lonely_dinner(void);
 
 /* ==== ACTIONS ==== */
 void	take_forks(t_philo *philo);
 void    down_forks(t_philo *philo);
+void	philo_sleep(t_philo *philo);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);

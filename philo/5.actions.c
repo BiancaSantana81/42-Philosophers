@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:21:12 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 11:47:02 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 14:57:07 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void    take_forks(t_philo *philo)
 {
     pthread_mutex_lock(&philo->first_fork->fork);
     printf(P_FORK_ONE, philo->thread_id, philo->id);
-    pthread_mutex_lock(&philo->first_fork->fork);
+    pthread_mutex_lock(&philo->second_fork->fork);
     printf(P_FORK_TWO, philo->thread_id, philo->id);
 }
 
@@ -26,4 +26,12 @@ void    down_forks(t_philo *philo)
     printf(D_FORK_ONE, philo->thread_id, philo->id);
     pthread_mutex_unlock(&philo->first_fork->fork);
     printf(D_FORK_TWO, philo->thread_id, philo->id);
+}
+
+void philo_sleep(t_philo *philo)
+{
+    t_table *table = philo->table;
+
+    printf(SLEEP, table->philos->thread_id, table->philos->id);
+    usleep(table->time_to_sleep);
 }
