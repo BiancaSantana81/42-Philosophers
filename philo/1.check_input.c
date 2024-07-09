@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:33:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 15:58:18 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 12:04:30 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static void	everything_on_the_table(t_table *table, long int number, int index)
 		else if (index == 4)
 			table->time_to_sleep = number;
 	}
+	if (index != 5)
+        table->nbr_limits_mails = -1;
 	if (table->philo_nbr > 200)
 		error_message("Dammit! Do you want over 200 threads running?", table);
 }

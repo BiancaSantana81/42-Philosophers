@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/08 19:12:56 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/09 11:46:09 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@
 # define WHITE "\033[1;37m"
 
 /* PRINT MESSAGES */
-# define THINK "Philosopher %d %ld is thinking... 💡\n"
-# define GET_FORK "Philosopher %d %ld has taken a fork... 🍴"
-# define DEATH "💀 Philosopher %d %ld has died! 💀"
-# define SLEEP "Philosopher %d %ld is sleeping... 💤💤"
-# define EAT "Philosopher %d %ld is eating... 😋"
+# define THINK "[%ld] %d is thinking... 💡\n"
+# define P_FORK_ONE  "[%ld] %d has taken the first fork.🍴\n"
+# define P_FORK_TWO "[%ld] %d has taken the second fork.🍴\n"
+# define D_FORK_ONE "[%ld] %d has put down the first fork.🍴\n"
+# define D_FORK_TWO "[%ld] %d has put down the second fork.🍴\n"
+# define DEATH  RED"💀 [%ld] %d has died! 💀"RST
+# define SLEEP "[%ld] %d is sleeping... 💤💤"
+# define EAT "[%ld] %d is eating... 😋"
 
 typedef pthread_mutex_t	t_mtx;
 typedef struct s_philo	t_philo;
@@ -90,6 +93,10 @@ void		dinner_start(t_table *table);
 void		*control(void *null);
 void		*routine(void *arg);
 void		lonely_dinner(void);
+
+/* ==== ACTIONS ==== */
+void	take_forks(t_philo *philo);
+void    down_forks(t_philo *philo);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);
