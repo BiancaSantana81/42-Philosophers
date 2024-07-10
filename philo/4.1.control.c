@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:46:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 17:47:00 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:40:52 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,41 +41,6 @@ void    *philo_die(void *null)
     return (NULL);
 }
 
-// void *control(void *null)
-// {   
-//     (void)null;
-//     t_table *table;
-//     long    current_time;
-//     int     i;
-
-//     table = get_table();
-//     i = 0;
-//     while (table->end_simulation == false)
-//     {
-//         while (i < table->philo_nbr)
-//         {
-//             current_time = get_time();
-//             printf("Current time: %ld, Philosopher %d last meal time: %ld, Time to die: %ld\n", current_time, table->philo[i].id, table->philo[i].last_meal_time, table->time_to_die);
-//             if ((current_time - table->philo[i].last_meal_time) > table->time_to_die)
-//             {
-//                 print_message(table->philo, DEATH);
-//                 table->end_simulation = true;
-//                 return (NULL);
-//             }
-//             i++;
-//         }
-//         i = 0;
-//         if (table->nbr_limits_meals > 0 && philo_satisfied())
-//         {
-//             printf("filo satisfeito.\n");
-//             table->end_simulation = true;
-//             return (NULL);
-//         }
-//         usleep(1000);
-//     }
-//     return (NULL);
-// }
-
 void *control(void *null)
 {
     (void)null;
@@ -91,16 +56,16 @@ void *control(void *null)
         while (i < table->philo_nbr)
         {
             current_time = get_time();
-            //pthread_mutex_lock(&table->philo[i].last_meal_time_mutex);
+            pthread_mutex_lock(&table->philo[i].last_meal_time_mutex);
             time_since_last_meal = (current_time - table->philo[i].last_meal_time) * 1000;    
             if (time_since_last_meal > table->time_to_die)
             {
                 print_message(&(table->philo[i]), DEATH);
                 table->end_simulation = true;
-                //pthread_mutex_unlock(&table->philo[i].last_meal_time_mutex);
+                pthread_mutex_unlock(&table->philo[i].last_meal_time_mutex);
                 return (NULL);
             }
-            //pthread_mutex_unlock(&table->philo[i].last_meal_time_mutex);
+            pthread_mutex_unlock(&table->philo[i].last_meal_time_mutex);
             i++;
         }
         if (table->nbr_limits_meals > 0 && philo_satisfied())

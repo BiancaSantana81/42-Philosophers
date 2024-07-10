@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 15:28:18 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:44:09 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void    *lonely_dinner(void)
     t_table table;
 
     table = *get_table();
-    take_forks(table.philo);
+    printf("pobi vai morrer sozinho.\n");
+    philo_eating(table.philo);
     usleep(table.time_to_die);
+    down_forks(table.philo);
     print_message(table.philo, DEATH);
     return (NULL);
 }
@@ -30,10 +32,13 @@ void *routine(void *arg)
 
     table = *get_table();
     philo = (t_philo *)arg;
-    if (table.end_simulation == 1)
+    if (table.philo_nbr == 1)
         return (lonely_dinner());
+    pthread_mutex_lock(&table.end_simulation_mutex);
     while (!(table.end_simulation))
     {
+        if (table.end_simulation == true)
+            break ;
         philo_eating(philo);
         if (table.end_simulation == true)
             break ;
@@ -44,5 +49,6 @@ void *routine(void *arg)
         if (table.end_simulation == true)
             break ;
     }
+    pthread_mutex_unlock(&table.end_simulation_mutex);
     return (NULL);
 }

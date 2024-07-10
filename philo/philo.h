@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 17:49:20 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 20:41:40 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define P_FORK_TWO "[%ld] %d has taken the second fork.🍴\n"
 # define D_FORK_ONE "[%ld] %d has put down the first fork.🍴\n"
 # define D_FORK_TWO "[%ld] %d has put down the second fork.🍴\n"
-# define DEATH RED"[%ld] 💀 %d has died! 💀"RST
+# define DEATH RED"[%ld] 💀 %d died! 💀"RST
 # define SLEEP "[%ld] %d is sleeping. 💤\n"
 # define EAT "[%ld] %d is eating. 🍔\n"
 
@@ -58,6 +58,7 @@ typedef struct s_table
 	long	nbr_limits_meals;
 	long	start_time;
 	bool	end_simulation;
+	pthread_mutex_t	end_simulation_mutex;
 	t_philo	*philo;
 	t_fork	*fork;
 	t_mtx	table_mutex;
