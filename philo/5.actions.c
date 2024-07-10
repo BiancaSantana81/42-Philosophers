@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:21:12 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 18:39:26 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:21:05 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,39 @@ void philo_sleep(t_philo *philo)
     usleep(table->time_to_sleep);
 }
 
-void    philo_eating(t_philo *philo)
+void philo_eating(t_philo *philo)
 {
-    t_table *table;
+    t_table *table = get_table();
     
-    table = get_table();
-    if (table->end_simulation)
-        return;
+    take_forks(philo);
+    pthread_mutex_lock(&philo->last_meal_time_mutex);
+    philo->last_meal_time = get_time();
+    pthread_mutex_unlock(&philo->last_meal_time_mutex);
     print_message(philo, EAT);
+    pthread_mutex_lock(&philo->meals_counter_mutex);
     philo->meals_counter++;
-    usleep(table->time_to_eat);  
+    pthread_mutex_unlock(&philo->meals_counter_mutex);
+    usleep(table->time_to_eat);
     down_forks(philo);
 }
+
+// void philo_eating(t_philo *philo)
+// {
+//     t_table *table = get_table();
+    
+//     // if (table->end_simulation)
+//     //     return;
+//     take_forks(philo);
+//     //pthread_mutex_lock(&philo->last_meal_time_mutex);
+//     philo->last_meal_time = get_time();
+//     //pthread_mutex_unlock(&philo->last_meal_time_mutex);
+//     print_message(philo, EAT);
+//     pthread_mutex_lock(&philo->meals_counter_mutex);
+//     philo->meals_counter++;
+//     pthread_mutex_unlock(&philo->meals_counter_mutex);
+//     usleep(table->time_to_eat);
+//     down_forks(philo);
+// }
 
 void philo_thinking(t_philo *philo)
 {

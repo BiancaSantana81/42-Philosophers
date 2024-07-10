@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:57:48 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 17:39:35 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 14:09:07 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	*allocate_memory(int bytes)
 
 void free_everything(t_table *table)
 {
-	if (table->philos)
-		free(table->philos);
-	if (table->forks)
-		free(table->forks);
+	if (table->philo)
+		free(table->philo);
+	if (table->fork)
+		free(table->fork);
 	if (table)
 		free(table);
 }

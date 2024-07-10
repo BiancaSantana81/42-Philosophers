@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 17:20:14 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:49:20 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define P_FORK_TWO "[%ld] %d has taken the second fork.🍴\n"
 # define D_FORK_ONE "[%ld] %d has put down the first fork.🍴\n"
 # define D_FORK_TWO "[%ld] %d has put down the second fork.🍴\n"
-# define DEATH  RED"💀 [%ld] %d has died! 💀"RST
+# define DEATH RED"[%ld] 💀 %d has died! 💀"RST
 # define SLEEP "[%ld] %d is sleeping. 💤\n"
 # define EAT "[%ld] %d is eating. 🍔\n"
 
@@ -55,13 +55,13 @@ typedef struct s_table
 	long	time_to_die;
 	long	time_to_eat;
 	long	time_to_sleep;
-	long	nbr_limits_mails;
+	long	nbr_limits_meals;
 	long	start_time;
 	bool	end_simulation;
-	pthread_mutex_t	print;
+	t_philo	*philo;
+	t_fork	*fork;
 	t_mtx	table_mutex;
-	t_philo	*philos;
-	t_fork	*forks;
+	pthread_mutex_t	print;
 }	t_table;
 
 /* PHILO STRUCT */
@@ -69,8 +69,10 @@ typedef struct s_philo
 {
 	int			id;
 	long		meals_counter;
+	pthread_mutex_t	meals_counter_mutex;
 	bool		full;
 	long		last_meal_time;
+	pthread_mutex_t	last_meal_time_mutex; 
 	t_fork		*first_fork;
 	t_fork		*second_fork;
 	pthread_t	thread_id;

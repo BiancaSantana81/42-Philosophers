@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:27:18 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 15:30:40 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:37:26 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void data_init(t_table *table)
 
     i = 0;
     table->end_simulation = false;
-    table->philos = allocate_memory(sizeof(t_philo) * table->philo_nbr);
-    table->forks = allocate_memory(sizeof(t_fork) * table->philo_nbr);
+    table->philo = allocate_memory(sizeof(t_philo) * table->philo_nbr);
+    table->fork = allocate_memory(sizeof(t_fork) * table->philo_nbr);
     while (i < table->philo_nbr)
     {
-        if (pthread_mutex_init(&table->forks[i].fork, NULL) != 0)
+        if (pthread_mutex_init(&table->fork[i].fork, NULL) != 0)
 			error_message("Error initializing mutex.", table);
-        table->forks[i].id = i;
+        table->fork[i].id = i;
         i++;
     }
 	if (pthread_mutex_init(&table->print, NULL) != 0)
@@ -40,12 +40,17 @@ void	init_philo(t_table *table)
 	i = 0;
 	while (i < table->philo_nbr)
 	{
-		philo = table->philos + i;
+		philo = table->philo + i;
 		philo->id = i + 1;
 		philo->full = false;
 		philo->meals_counter = 0;
+		philo->last_meal_time = get_time();
+		if (pthread_mutex_init(&table->philo[i].meals_counter_mutex, NULL) != 0)
+			error_message("Error initializing print mutex.", table);
+		if (pthread_mutex_init(&table->philo[i].last_meal_time_mutex, NULL) != 0)
+			error_message("Error initializing print mutex.", table);
 		philo->table = table;
-		assign_forks(philo, table->forks, i);
+		assign_forks(philo, table->fork, i);
 		i++;
 	}
 }
