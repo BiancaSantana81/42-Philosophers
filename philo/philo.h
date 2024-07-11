@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 16:10:14 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:33:07 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ typedef struct s_philo
 	t_table			*table;
 }	t_philo;
 
-/* ==== CHECK INPUT ==== */
+/* ==== INPUT ==== */
 void		prepare_dinner_table(int argc, char **input, t_table *table);
 int			ft_isdigit(int c);
 int			is_number(char *input);
 long int	ft_atol(const char *nptr);
 
-/* ==== INIT DATA ==== */
+/* ==== DATA ==== */
 void		data_init(t_table *table);
 void		init_philo(t_table *table);
 void		assign_forks(t_philo *philo, t_fork *forks, int philo_position);
