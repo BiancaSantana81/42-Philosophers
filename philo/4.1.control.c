@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:46:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 21:48:51 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:55:46 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	*control(void *null)
 		}
 		if (table->nbr_limits_meals > 0 && philo_satisfied())
 		{
-			printf("Philosopher satisfied.\n");
 			table->end_simulation = true;
 			return (NULL);
 		}
