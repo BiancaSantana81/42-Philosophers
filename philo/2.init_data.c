@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 11:27:18 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 21:15:05 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:56:16 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	init_philo(t_table *table)
 	{
 		philo = table->philo + i;
 		philo->id = i + 1;
-		philo->full = false;
 		philo->meals_counter = 0;
 		philo->last_meal_time = get_time();
 		if (pthread_mutex_init(&table->philo[i].meals_counter_mutex, NULL) != 0)
 			error_message("Error initializing print mutex.", table);
-		if (pthread_mutex_init(&table->philo[i].last_meal_time_mutex, NULL) != 0)
+		if (pthread_mutex_init(
+				&table->philo[i].last_meal_time_mutex, NULL) != 0)
 			error_message("Error initializing print mutex.", table);
 		philo->table = table;
 		assign_forks(philo, table->fork, i);

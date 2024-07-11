@@ -6,11 +6,14 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 14:52:12 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:08:48 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static bool	check_end_simulation(t_table *table);
+static void	philo_actions(t_philo *philo);
 
 void	*lonely_dinner(void)
 {
@@ -22,7 +25,7 @@ void	*lonely_dinner(void)
 	table->end_simulation = true;
 	pthread_mutex_unlock(&table->end_simulation_mutex);
 	usleep(table->time_to_die);
-	print_message(table->philo, DEATH);
+	print_message(table->philo, DIE_ALONE);
 	return (NULL);
 }
 
@@ -35,60 +38,31 @@ void	*routine(void *arg)
 	philo = (t_philo *)arg;
 	if (table->philo_nbr == 1)
 		return (lonely_dinner());
-	while (1)
-	{
-		pthread_mutex_lock(&table->end_simulation_mutex);
-		if (table->end_simulation)
-		{
-			pthread_mutex_unlock(&table->end_simulation_mutex);
-			break ;
-		}
-		pthread_mutex_unlock(&table->end_simulation_mutex);
-		philo_eating(philo);
-		pthread_mutex_lock(&table->end_simulation_mutex);
-		if (table->end_simulation)
-		{
-			pthread_mutex_unlock(&table->end_simulation_mutex);
-			break ;
-		}
-		pthread_mutex_unlock(&table->end_simulation_mutex);
-		philo_sleep(philo);
-		pthread_mutex_lock(&table->end_simulation_mutex);
-		if (table->end_simulation)
-		{
-			pthread_mutex_unlock(&table->end_simulation_mutex);
-			break ;
-		}
-		pthread_mutex_unlock(&table->end_simulation_mutex);
-		philo_thinking(philo);
-	}
+	while (!check_end_simulation(table))
+		philo_actions(philo);
 	return (NULL);
 }
 
-// void	*routine(void *arg)
-// {
-// 	t_table	table;
-// 	t_philo	*philo;
+static bool	check_end_simulation(t_table *table)
+{
+	bool	end_simulation;
 
-// 	table = *get_table();
-// 	philo = (t_philo *)arg;
-// 	if (table.philo_nbr == 1)
-// 		return (lonely_dinner());
-// 	pthread_mutex_lock(&table.end_simulation_mutex);
-// 	while (!(table.end_simulation))
-// 	{
-// 		if (table.end_simulation == true)
-// 			break ;
-// 		philo_eating(philo);
-// 		if (table.end_simulation == true)
-// 			break ;
-// 		philo_sleep(philo);
-// 		if (table.end_simulation == true)
-// 			break ;
-// 		philo_thinking(philo);
-// 		if (table.end_simulation == true)
-// 			break ;
-// 	}
-// 	pthread_mutex_unlock(&table.end_simulation_mutex);
-// 	return (NULL);
-// }
+	pthread_mutex_lock(&table->end_simulation_mutex);
+	end_simulation = table->end_simulation;
+	pthread_mutex_unlock(&table->end_simulation_mutex);
+	return (end_simulation);
+}
+
+static void	philo_actions(t_philo *philo)
+{
+	t_table	*table;
+
+	table = get_table();
+	philo_eating(philo);
+	if (check_end_simulation(table))
+		return ;
+	philo_sleep(philo);
+	if (check_end_simulation(table))
+		return ;
+	philo_thinking(philo);
+}

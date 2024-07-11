@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 14:49:02 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 16:10:14 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@
 # define P_FORK_TWO "[%ld] %d has taken the second fork.🍴\n"
 # define D_FORK_ONE "[%ld] %d has put down the first fork.🍴\n"
 # define D_FORK_TWO "[%ld] %d has put down the second fork.🍴\n"
-# define DEATH "[%ld] 💀 %d died! 💀"
+# define DEATH "[%ld] %d died! 💀"
+# define DIE_ALONE "[%ld] %d died alone 😭"
 # define SLEEP "[%ld] %d is sleeping. 💤\n"
 # define EAT "[%ld] %d is eating. 🍔\n"
 
@@ -71,7 +72,6 @@ typedef struct s_philo
 	int				id;
 	long			meals_counter;
 	pthread_mutex_t	meals_counter_mutex;
-	bool			full;
 	long			last_meal_time;
 	pthread_mutex_t	last_meal_time_mutex;
 	t_fork			*first_fork;
@@ -93,9 +93,18 @@ void		assign_forks(t_philo *philo, t_fork *forks, int philo_position);
 
 /* ==== DINNER ==== */
 void		dinner_start(t_table *table);
+
+/* ==== CONTROL ==== */
 void		*control(void *null);
-void		*routine(void *arg);
+void		check_philosophers(t_table *table);
+
+/* ==== ROUTINE ==== */
 void		*lonely_dinner(void);
+void		*routine(void *arg);
+
+/* ==== TIME ==== */
+long		get_time(void);
+long		get_elapsed_time(long start_time);
 
 /* ==== ACTIONS ==== */
 void		take_forks(t_philo *philo);
@@ -104,14 +113,13 @@ void		philo_sleep(t_philo *philo);
 void		philo_eating(t_philo *philo);
 void		philo_thinking(t_philo *philo);
 
-/* ==== TIME ==== */
-long		get_time(void);
-long		get_elapsed_time(long start_time);
+/* ==== CLEAN ==== */
+void		free_everything(t_table *table);
+void		destroy_mutexes(t_table *table);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);
 void		*allocate_memory(int bytes);
-void		free_everything(t_table *table);
 void		set_table(t_table *new_table);
 t_table		*get_table(void);
 void		print_message(t_philo *philo, const char *message);

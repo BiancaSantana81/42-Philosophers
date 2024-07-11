@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:21:12 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 14:30:19 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:03:27 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,5 @@ void	philo_thinking(t_philo *philo)
 	}
 	pthread_mutex_unlock(&table->end_simulation_mutex);
 	print_message(philo, THINK);
-	usleep(10000);
+	usleep(1000);
 }

@@ -6,13 +6,13 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 10:30:55 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 21:49:54 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 15:40:28 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void print_table(t_table *table)
+void    print_table(t_table *table)
 {
     int i = 0;
     
