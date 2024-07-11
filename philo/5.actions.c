@@ -6,94 +6,95 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:21:12 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 20:47:50 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:45:25 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void take_forks(t_philo *philo)
+void	take_forks(t_philo *philo)
 {
-    t_table *table = get_table();
+	t_table	*table;
 
-    pthread_mutex_lock(&philo->first_fork->fork);
-    pthread_mutex_lock(&table->end_simulation_mutex);
-    if (table->end_simulation)
-    {
-        pthread_mutex_unlock(&table->end_simulation_mutex);
-        pthread_mutex_unlock(&philo->first_fork->fork);
-        return ;
-    }
-    pthread_mutex_unlock(&table->end_simulation_mutex);
-    print_message(philo, P_FORK_ONE);
-    pthread_mutex_lock(&philo->second_fork->fork);
-    pthread_mutex_lock(&table->end_simulation_mutex);
-    if (table->end_simulation)
-    {
-        pthread_mutex_unlock(&table->end_simulation_mutex);
-        pthread_mutex_unlock(&philo->first_fork->fork);
-        pthread_mutex_unlock(&philo->second_fork->fork);
-        return ;
-    }
-    pthread_mutex_unlock(&table->end_simulation_mutex);
-    print_message(philo, P_FORK_TWO);
+	table = get_table();
+	pthread_mutex_lock(&philo->first_fork->fork);
+	pthread_mutex_lock(&table->end_simulation_mutex);
+	if (table->end_simulation)
+	{
+		pthread_mutex_unlock(&table->end_simulation_mutex);
+		pthread_mutex_unlock(&philo->first_fork->fork);
+		return ;
+	}
+	pthread_mutex_unlock(&table->end_simulation_mutex);
+	print_message(philo, P_FORK_ONE);
+	pthread_mutex_lock(&philo->second_fork->fork);
+	pthread_mutex_lock(&table->end_simulation_mutex);
+	if (table->end_simulation)
+	{
+		pthread_mutex_unlock(&table->end_simulation_mutex);
+		pthread_mutex_unlock(&philo->first_fork->fork);
+		pthread_mutex_unlock(&philo->second_fork->fork);
+		return ;
+	}
+	pthread_mutex_unlock(&table->end_simulation_mutex);
+	print_message(philo, P_FORK_TWO);
 }
 
-void    down_forks(t_philo *philo)
+void	down_forks(t_philo *philo)
 {
-    pthread_mutex_unlock(&philo->first_fork->fork);
-    pthread_mutex_unlock(&philo->second_fork->fork);
+	pthread_mutex_unlock(&philo->first_fork->fork);
+	pthread_mutex_unlock(&philo->second_fork->fork);
 }
 
-void philo_sleep(t_philo *philo)
+void	philo_sleep(t_philo *philo)
 {
-    t_table *table; 
-    
-    table = get_table();
-    if (table->end_simulation)
-        return;
-    print_message(philo, SLEEP);
-    usleep(table->time_to_sleep);
+	t_table	*table;
+
+	table = get_table();
+	if (table->end_simulation)
+		return ;
+	print_message(philo, SLEEP);
+	usleep(table->time_to_sleep);
 }
 
-void philo_eating(t_philo *philo)
+void	philo_eating(t_philo *philo)
 {
-    t_table *table;
+	t_table	*table;
 
-    table = get_table();
-    pthread_mutex_lock(&table->end_simulation_mutex);
-    if (!table->end_simulation)
-    {
-        pthread_mutex_unlock(&table->end_simulation_mutex);
-        take_forks(philo);
-        pthread_mutex_lock(&philo->last_meal_time_mutex);
-        philo->last_meal_time = get_time();
-        pthread_mutex_unlock(&philo->last_meal_time_mutex);    
-        print_message(philo, EAT);
-        pthread_mutex_lock(&philo->meals_counter_mutex);
-        philo->meals_counter++;
-        pthread_mutex_unlock(&philo->meals_counter_mutex);
-        usleep(table->time_to_eat);
-        down_forks(philo);
-    }
-    else
-    {
-        pthread_mutex_unlock(&table->end_simulation_mutex);
-        down_forks(philo);
-    }
+	table = get_table();
+	pthread_mutex_lock(&table->end_simulation_mutex);
+	if (!table->end_simulation)
+	{
+		pthread_mutex_unlock(&table->end_simulation_mutex);
+		take_forks(philo);
+		pthread_mutex_lock(&philo->last_meal_time_mutex);
+		philo->last_meal_time = get_time();
+		pthread_mutex_unlock(&philo->last_meal_time_mutex);
+		print_message(philo, EAT);
+		pthread_mutex_lock(&philo->meals_counter_mutex);
+		philo->meals_counter++;
+		pthread_mutex_unlock(&philo->meals_counter_mutex);
+		usleep(table->time_to_eat);
+		down_forks(philo);
+	}
+	else
+	{
+		pthread_mutex_unlock(&table->end_simulation_mutex);
+		down_forks(philo);
+	}
 }
 
-void philo_thinking(t_philo *philo)
+void	philo_thinking(t_philo *philo)
 {
-    t_table *table; 
-    
-    table = get_table();
-    pthread_mutex_lock(&table->end_simulation_mutex);
-    if (!table->end_simulation)
-    {
-        pthread_mutex_unlock(&table->end_simulation_mutex);
-        print_message(philo, THINK);
-        usleep(10000);    
-    }
-    pthread_mutex_unlock(&table->end_simulation_mutex);
+	t_table	*table;
+
+	table = get_table();
+	pthread_mutex_lock(&table->end_simulation_mutex);
+	if (!table->end_simulation)
+	{
+		pthread_mutex_unlock(&table->end_simulation_mutex);
+		print_message(philo, THINK);
+		usleep(10000);
+	}
+	pthread_mutex_unlock(&table->end_simulation_mutex);
 }

@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:57:48 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 14:09:07 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:25:45 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*allocate_memory(int bytes)
 	return (memory);
 }
 
-void free_everything(t_table *table)
+void	free_everything(t_table *table)
 {
 	if (table->philo)
 		free(table->philo);
@@ -39,25 +39,29 @@ void free_everything(t_table *table)
 		free(table);
 }
 
-t_table *get_table(void)
+t_table	*get_table(void)
 {
-    static t_table table;
-    return (&table);
+	static t_table	table;
+
+	return (&table);
 }
 
-void set_table(t_table *new_table)
+void	set_table(t_table *new_table)
 {
-    t_table *table = get_table();
-    *table = *new_table;
+	t_table	*table;
+
+	table = get_table();
+	*table = *new_table;
 }
 
-void print_message(t_philo *philo, const char *message)
+void	print_message(t_philo *philo, const char *message)
 {
-    t_table *table = philo->table;
-	
+	t_table	*table;
+
+	table = philo->table;
 	if (table->end_simulation)
-        return;
-    pthread_mutex_lock(&table->print);
-    printf(message,get_elapsed_time(table->start_time), philo->id);
-    pthread_mutex_unlock(&table->print);
+		return ;
+	pthread_mutex_lock(&table->print);
+	printf(message, get_elapsed_time(table->start_time), philo->id);
+	pthread_mutex_unlock(&table->print);
 }

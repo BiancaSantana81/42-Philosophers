@@ -6,14 +6,14 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:58:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/09 14:39:02 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:11:29 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 int	main(int argc, char **argv)
-{	
+{
 	t_table	*table;
 
 	table = malloc(sizeof(t_table));

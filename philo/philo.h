@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 20:41:40 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:28:42 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define P_FORK_TWO "[%ld] %d has taken the second fork.🍴\n"
 # define D_FORK_ONE "[%ld] %d has put down the first fork.🍴\n"
 # define D_FORK_TWO "[%ld] %d has put down the second fork.🍴\n"
-# define DEATH RED"[%ld] 💀 %d died! 💀"RST
+# define DEATH "[%ld] 💀 %d died! 💀"
 # define SLEEP "[%ld] %d is sleeping. 💤\n"
 # define EAT "[%ld] %d is eating. 🍔\n"
 
@@ -51,33 +51,33 @@ typedef struct s_fork
 /* MAIN STRUCT */
 typedef struct s_table
 {
-	int		philo_nbr;
-	long	time_to_die;
-	long	time_to_eat;
-	long	time_to_sleep;
-	long	nbr_limits_meals;
-	long	start_time;
-	bool	end_simulation;
+	int				philo_nbr;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	long			nbr_limits_meals;
+	long			start_time;
+	bool			end_simulation;
 	pthread_mutex_t	end_simulation_mutex;
-	t_philo	*philo;
-	t_fork	*fork;
-	t_mtx	table_mutex;
+	t_philo			*philo;
+	t_fork			*fork;
+	t_mtx			table_mutex;
 	pthread_mutex_t	print;
 }	t_table;
 
 /* PHILO STRUCT */
 typedef struct s_philo
 {
-	int			id;
-	long		meals_counter;
+	int				id;
+	long			meals_counter;
 	pthread_mutex_t	meals_counter_mutex;
-	bool		full;
-	long		last_meal_time;
-	pthread_mutex_t	last_meal_time_mutex; 
-	t_fork		*first_fork;
-	t_fork		*second_fork;
-	pthread_t	thread_id;
-	t_table		*table;
+	bool			full;
+	long			last_meal_time;
+	pthread_mutex_t	last_meal_time_mutex;
+	t_fork			*first_fork;
+	t_fork			*second_fork;
+	pthread_t		thread_id;
+	t_table			*table;
 }	t_philo;
 
 /* ==== CHECK INPUT ==== */
@@ -98,15 +98,15 @@ void		*routine(void *arg);
 void		*lonely_dinner(void);
 
 /* ==== ACTIONS ==== */
-void	take_forks(t_philo *philo);
-void    down_forks(t_philo *philo);
-void	philo_sleep(t_philo *philo);
-void    philo_eating(t_philo *philo);
-void	philo_thinking(t_philo *philo);
+void		take_forks(t_philo *philo);
+void		down_forks(t_philo *philo);
+void		philo_sleep(t_philo *philo);
+void		philo_eating(t_philo *philo);
+void		philo_thinking(t_philo *philo);
 
 /* ==== TIME ==== */
-long 	get_time();
-long	get_elapsed_time(long start_time);
+long		get_time(void);
+long		get_elapsed_time(long start_time);
 
 /* ==== UTILS ==== */
 void		error_message(char *string, t_table *table);

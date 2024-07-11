@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:33:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/10 11:50:27 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/10 21:29:56 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void	everything_on_the_table(t_table *table, long int number, int index)
 			table->time_to_sleep = number;
 	}
 	if (index != 5)
-        table->nbr_limits_meals = -1;
+		table->nbr_limits_meals = -1;
 	if (table->philo_nbr > 200)
 		error_message("Dammit! Do you want over 200 threads running?", table);
 }
