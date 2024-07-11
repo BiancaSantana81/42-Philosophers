@@ -6,7 +6,7 @@
 #    By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/01 13:31:36 by bsantana          #+#    #+#              #
-#    Updated: 2024/07/11 15:41:55 by bsantana         ###   ########.fr        #
+#    Updated: 2024/07/11 17:30:47 by bsantana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ CC := cc
 OBJ_PATH := objects
 
 # SOURCES
-CFILES := trash.c 0.philosophers.c utils.c 1.check_input.c 2.init_data.c 3.dinner.c 4.1.control.c \
-		4.2.routine.c 4.3.time.c 5.actions.c 6.clean.c
+CFILES := trash.c 0_philosophers.c 1_input.c 2_data.c 3_dinner.c 4_1_control.c \
+		4_2_routine.c 4_3_time.c 5_actions.c 6_clean.c utils.c
 OBJS := $(addprefix $(OBJ_PATH)/, $(notdir $(CFILES:.c=.o)))
 
 all: $(OBJ_PATH) $(NAME)

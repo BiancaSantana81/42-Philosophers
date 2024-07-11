@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   3.dinner.c                                         :+:      :+:    :+:   */
+/*   3_dinner.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 21:15:31 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 15:44:56 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 17:27:01 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	create_threads(t_table *table)
 	i = 0;
 	while (i < table->philo_nbr)
 	{
-		if (pthread_create(&table->philo[i].thread_id, NULL, routine, (void *)&table->philo[i]) != 0)
+		if (pthread_create(&table->philo[i].thread_id,
+				NULL, routine, (void *)&table->philo[i]) != 0)
 			error_message("Error creating thread.", table);
 		i++;
 	}
