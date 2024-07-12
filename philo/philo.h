@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 17:33:07 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/11 18:00:38 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,13 @@
 # define WHITE "\033[1;37m"
 
 /* PRINT MESSAGES */
-# define THINK "[%ld] %d is thinking.💡\n"
 # define P_FORK_ONE  "[%ld] %d has taken the first fork.🍴\n"
 # define P_FORK_TWO "[%ld] %d has taken the second fork.🍴\n"
-# define D_FORK_ONE "[%ld] %d has put down the first fork.🍴\n"
-# define D_FORK_TWO "[%ld] %d has put down the second fork.🍴\n"
+# define EAT "[%ld] %d is eating. 🍔\n"
+# define SLEEP "[%ld] %d is sleeping. 💤\n"
+# define THINK "[%ld] %d is thinking.💡\n"
 # define DEATH "[%ld] %d died! 💀"
 # define DIE_ALONE "[%ld] %d died alone 😭"
-# define SLEEP "[%ld] %d is sleeping. 💤\n"
-# define EAT "[%ld] %d is eating. 🍔\n"
 
 typedef pthread_mutex_t	t_mtx;
 typedef struct s_philo	t_philo;
