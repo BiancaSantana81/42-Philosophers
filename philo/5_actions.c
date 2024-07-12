@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:21:12 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/12 17:46:35 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:13:09 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ static void	philo_eating_aux(t_philo *philo)
 	print_message(philo, EAT);
 	pthread_mutex_lock(&philo->meals_counter_mutex);
 	philo->meals_counter++;
+	pthread_mutex_lock(&philo->full_mutex);
+	if (philo->meals_counter >= table->nbr_limits_meals)
+		philo->full = true;
+	pthread_mutex_unlock(&philo->full_mutex);
 	pthread_mutex_unlock(&philo->meals_counter_mutex);
 	usleep(table->time_to_eat);
 	down_forks(philo);

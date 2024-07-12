@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:46:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/12 13:14:49 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:16:49 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,6 @@ void	check_philosophers(t_table *table)
 	}
 }
 
-static bool	philo_satisfied(void)
-{
-	t_table	*table;
-	int		i;
-
-	i = 0;
-	table = get_table();
-	while (i < table->philo_nbr)
-	{
-		if (table->philo[i].meals_counter < table->nbr_limits_meals)
-			return (false);
-		i++;
-	}
-	return (true);
-}
-
 static bool	check_philo_death(t_philo *philo,
 	long current_time, long time_to_die)
 {
@@ -99,4 +83,25 @@ static bool	check_philo_death(t_philo *philo,
 	}
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
 	return (false);
+}
+
+static bool	philo_satisfied(void)
+{
+	t_table	*table;
+	int		i;
+
+	table = get_table();
+	i = 0;
+	while (i < table->philo_nbr)
+	{
+		pthread_mutex_lock(&table->philo[i].full_mutex);
+		if (!table->philo[i].full)
+		{
+			pthread_mutex_unlock(&table->philo[i].full_mutex);
+			return (false);
+		}
+		pthread_mutex_unlock(&table->philo[i].full_mutex);
+		i++;
+	}
+	return (true);
 }

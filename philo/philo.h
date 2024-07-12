@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/12 17:13:58 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:36:58 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef struct s_philo
 	t_fork			*first_fork;
 	t_fork			*second_fork;
 	pthread_t		thread_id;
+	pthread_mutex_t	full_mutex;
+	bool			full;
 	t_table			*table;
 }	t_philo;
 
