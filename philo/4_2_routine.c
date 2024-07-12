@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4.2.routine.c                                      :+:      :+:    :+:   */
+/*   4_2_routine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 16:08:48 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:15:09 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static bool	check_end_simulation(t_table *table);
 static void	philo_actions(t_philo *philo);
 
 void	*lonely_dinner(void)
@@ -41,16 +40,6 @@ void	*routine(void *arg)
 	while (!check_end_simulation(table))
 		philo_actions(philo);
 	return (NULL);
-}
-
-static bool	check_end_simulation(t_table *table)
-{
-	bool	end_simulation;
-
-	pthread_mutex_lock(&table->end_simulation_mutex);
-	end_simulation = table->end_simulation;
-	pthread_mutex_unlock(&table->end_simulation_mutex);
-	return (end_simulation);
 }
 
 static void	philo_actions(t_philo *philo)

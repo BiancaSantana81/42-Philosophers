@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 18:00:38 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:15:27 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ void		assign_forks(t_philo *philo, t_fork *forks, int philo_position);
 void		dinner_start(t_table *table);
 
 /* ==== CONTROL ==== */
+bool		check_end_simulation(t_table *table);
 void		*control(void *null);
 void		check_philosophers(t_table *table);
 

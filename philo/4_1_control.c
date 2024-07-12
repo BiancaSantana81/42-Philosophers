@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   4.1.control.c                                      :+:      :+:    :+:   */
+/*   4_1_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:46:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 15:39:22 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/12 13:14:49 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,33 @@ static bool	philo_satisfied(void);
 static bool	check_philo_death(t_philo *philo,
 				long current_time, long time_to_die);
 
+bool	check_end_simulation(t_table *table)
+{
+	bool	end_simulation;
+
+	pthread_mutex_lock(&table->end_simulation_mutex);
+	end_simulation = table->end_simulation;
+	pthread_mutex_unlock(&table->end_simulation_mutex);
+	return (end_simulation);
+}
+
 void	*control(void *null)
 {
 	t_table	*table;
 
 	(void)null;
 	table = get_table();
-	while (!table->end_simulation)
+	while (!check_end_simulation(table))
 	{
 		check_philosophers(table);
-		if (table->end_simulation)
+		if (check_end_simulation(table))
 			break ;
 		if (table->nbr_limits_meals > 0 && philo_satisfied())
+		{
+			pthread_mutex_lock(&table->end_simulation_mutex);
 			table->end_simulation = true;
+			pthread_mutex_unlock(&table->end_simulation_mutex);
+		}
 		usleep(10000);
 	}
 	return (NULL);
@@ -46,7 +60,9 @@ void	check_philosophers(t_table *table)
 		if (check_philo_death(&(table->philo[i]),
 				current_time, table->time_to_die))
 		{
+			pthread_mutex_lock(&table->end_simulation_mutex);
 			table->end_simulation = true;
+			pthread_mutex_unlock(&table->end_simulation_mutex);
 			return ;
 		}
 	}
