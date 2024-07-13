@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 15:41:19 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/12 19:29:27 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/13 18:55:42 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	destroy_mutexes(t_table *table)
 			error_message("Error destroying last_meal_time.", table);
 		else if (pthread_mutex_destroy(
 				&table->philo[j].full_mutex) != 0)
-			error_message("Error destroying last_meal_time.", table);
+			error_message("Error destroying full mutex.", table);
 	}
 }

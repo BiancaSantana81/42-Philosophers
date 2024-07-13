@@ -6,35 +6,45 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:21:12 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/12 19:13:09 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/13 19:02:59 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	philo_eating_aux(t_philo *philo);
+static bool	is_philo_full(t_philo *philo);
+
+static bool	is_philo_full(t_philo *philo)
+{
+	bool	full;
+
+	pthread_mutex_lock(&philo->full_mutex);
+	full = philo->full;
+	pthread_mutex_unlock(&philo->full_mutex);
+	return (full);
+}
 
 void	philo_eating(t_philo *philo)
 {
-	t_table	*table;
-
-	table = get_table();
+	if (is_philo_full(philo))
+		return ;
 	pthread_mutex_lock(&philo->first_fork->fork);
-	if (check_end_simulation(table))
+	if (check_end_simulation(philo->table))
 	{
 		pthread_mutex_unlock(&philo->first_fork->fork);
 		return ;
 	}
 	print_message(philo, P_FORK_ONE);
 	pthread_mutex_lock(&philo->second_fork->fork);
-	if (check_end_simulation(table))
+	if (check_end_simulation(philo->table))
 	{
 		pthread_mutex_unlock(&philo->first_fork->fork);
 		pthread_mutex_unlock(&philo->second_fork->fork);
 		return ;
 	}
 	print_message(philo, P_FORK_TWO);
-	if (check_end_simulation(table))
+	if (check_end_simulation(philo->table))
 	{
 		down_forks(philo);
 		return ;
@@ -50,16 +60,21 @@ static void	philo_eating_aux(t_philo *philo)
 	pthread_mutex_lock(&philo->last_meal_time_mutex);
 	philo->last_meal_time = get_time();
 	pthread_mutex_unlock(&philo->last_meal_time_mutex);
-	print_message(philo, EAT);
 	pthread_mutex_lock(&philo->meals_counter_mutex);
-	philo->meals_counter++;
-	pthread_mutex_lock(&philo->full_mutex);
-	if (philo->meals_counter >= table->nbr_limits_meals)
+	if (!philo->full)
+	{
+		philo->meals_counter++;
+		print_message(philo, EAT);
+		usleep(table->time_to_eat);
+		down_forks(philo);
+	}
+	if (philo->meals_counter == table->nbr_limits_meals)
+	{
+		pthread_mutex_lock(&philo->full_mutex);
 		philo->full = true;
-	pthread_mutex_unlock(&philo->full_mutex);
+		pthread_mutex_unlock(&philo->full_mutex);
+	}
 	pthread_mutex_unlock(&philo->meals_counter_mutex);
-	usleep(table->time_to_eat);
-	down_forks(philo);
 }
 
 void	down_forks(t_philo *philo)
