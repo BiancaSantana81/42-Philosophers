@@ -6,13 +6,23 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/12 16:38:30 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:21:34 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	philo_actions(t_philo *philo);
+
+bool	is_philo_full(t_philo *philo)
+{
+	bool	full;
+
+	pthread_mutex_lock(&philo->full_mutex);
+	full = philo->full;
+	pthread_mutex_unlock(&philo->full_mutex);
+	return (full);
+}
 
 void	*lonely_dinner(void)
 {

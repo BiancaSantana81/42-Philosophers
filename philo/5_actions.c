@@ -6,49 +6,36 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/09 11:21:12 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/13 19:02:59 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:22:23 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static void	philo_eating_aux(t_philo *philo);
-static bool	is_philo_full(t_philo *philo);
-
-static bool	is_philo_full(t_philo *philo)
-{
-	bool	full;
-
-	pthread_mutex_lock(&philo->full_mutex);
-	full = philo->full;
-	pthread_mutex_unlock(&philo->full_mutex);
-	return (full);
-}
 
 void	philo_eating(t_philo *philo)
 {
+	t_table	*table;
+
+	table = get_table();
 	if (is_philo_full(philo))
 		return ;
 	pthread_mutex_lock(&philo->first_fork->fork);
-	if (check_end_simulation(philo->table))
+	if (check_end_simulation(table))
 	{
 		pthread_mutex_unlock(&philo->first_fork->fork);
 		return ;
 	}
 	print_message(philo, P_FORK_ONE);
 	pthread_mutex_lock(&philo->second_fork->fork);
-	if (check_end_simulation(philo->table))
+	if (check_end_simulation(table))
 	{
 		pthread_mutex_unlock(&philo->first_fork->fork);
 		pthread_mutex_unlock(&philo->second_fork->fork);
 		return ;
 	}
 	print_message(philo, P_FORK_TWO);
-	if (check_end_simulation(philo->table))
-	{
-		down_forks(philo);
-		return ;
-	}
 	philo_eating_aux(philo);
 }
 

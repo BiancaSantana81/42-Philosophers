@@ -6,7 +6,7 @@
 /*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/12 18:36:58 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/13 20:22:08 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ void		check_philosophers(t_table *table);
 /* ==== ROUTINE ==== */
 void		*lonely_dinner(void);
 void		*routine(void *arg);
+bool		is_philo_full(t_philo *philo);
 
 /* ==== TIME ==== */
 long		get_time(void);
