@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+         #
+#    By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/01 13:31:36 by bsantana          #+#    #+#              #
-#    Updated: 2024/07/12 19:48:37 by bsantana         ###   ########.fr        #
+#    Updated: 2024/07/15 11:01:13 by bsantana         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ WHITE := \033[1;37m
 BOLD := \033[1;33m
 
 NAME := philo
-CFLAGS := -Wextra -Wall -Werror -g3
+CFLAGS :=  -Wextra -Wall -Werror
 MAKEFLAGS += --silent
 VALGRIND_FLAGS := --leak-check=full --show-leak-kinds=all --track-origins=yes
 HELGRIND_FLAGS := --tool=helgrind
@@ -40,7 +40,7 @@ $(OBJ_PATH)/%.o: %.c | $(OBJ_PATH)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) -o $(NAME)
+	@$(CC) $(OBJS) -pthread -o $(NAME)
 	@echo "$(GREEN)------------------------------------------------  "
 	@echo "$(WHITE) 🍽️  Are you ready for our philosophical dinner? 🍽️"
 	@echo "$(GREEN)------------------------------------------------  "

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:57:48 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/11 15:51:55 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/15 11:42:53 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	print_message(t_philo *philo, const char *message)
 	t_table	*table;
 
 	table = philo->table;
-	if (table->end_simulation)
+	if (check_end_simulation(table))
 		return ;
 	pthread_mutex_lock(&table->print);
 	printf(message, get_elapsed_time(table->start_time), philo->id);
