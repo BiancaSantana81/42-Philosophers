@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   4_2_routine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 16:45:58 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/13 20:21:34 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/15 13:51:11 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	*lonely_dinner(void)
 
 void	*routine(void *arg)
 {
-	t_table	*table;
 	t_philo	*philo;
+	t_table	*table;
 
-	table = get_table();
 	philo = (t_philo *)arg;
+	table = get_table();
 	if (table->philo_nbr == 1)
 		return (lonely_dinner());
 	while (!check_end_simulation(table))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 13:56:14 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/13 20:22:08 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:02:12 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 /* COLOR MESSAGES */
 # define RST "\033[0m"
 # define RED "\033[1;31m"
-# define WHITE "\033[1;37m"
 
 /* PRINT MESSAGES */
 # define P_FORK_ONE  "[%ld] %d has taken the first fork.🍴\n"
@@ -75,8 +74,8 @@ typedef struct s_philo
 	t_fork			*first_fork;
 	t_fork			*second_fork;
 	pthread_t		thread_id;
-	pthread_mutex_t	full_mutex;
 	bool			full;
+	pthread_mutex_t	full_mutex;
 	t_table			*table;
 }	t_philo;
 
@@ -97,7 +96,7 @@ void		dinner_start(t_table *table);
 /* ==== CONTROL ==== */
 bool		check_end_simulation(t_table *table);
 void		*control(void *null);
-void		check_philosophers(t_table *table);
+void		check_philosopher_death(t_table *table);
 
 /* ==== ROUTINE ==== */
 void		*lonely_dinner(void);
@@ -109,7 +108,6 @@ long		get_time(void);
 long		get_elapsed_time(long start_time);
 
 /* ==== ACTIONS ==== */
-void		take_forks(t_philo *philo);
 void		down_forks(t_philo *philo);
 void		philo_sleep(t_philo *philo);
 void		philo_eating(t_philo *philo);
@@ -125,8 +123,5 @@ void		*allocate_memory(int bytes);
 void		set_table(t_table *new_table);
 t_table		*get_table(void);
 void		print_message(t_philo *philo, const char *message);
-
-/* ==== TRASH ==== */
-void		print_table(t_table *table);
 
 #endif

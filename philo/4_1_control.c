@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   4_1_control.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsantana <bsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bsantana <bsantana@student.42sp.org.br     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 15:46:50 by bsantana          #+#    #+#             */
-/*   Updated: 2024/07/12 19:16:49 by bsantana         ###   ########.fr       */
+/*   Updated: 2024/07/15 13:48:12 by bsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static bool	philo_satisfied(void);
-static bool	check_philo_death(t_philo *philo,
+static bool	is_death(t_philo *philo,
 				long current_time, long time_to_die);
 
 bool	check_end_simulation(t_table *table)
@@ -34,7 +34,7 @@ void	*control(void *null)
 	table = get_table();
 	while (!check_end_simulation(table))
 	{
-		check_philosophers(table);
+		check_philosopher_death(table);
 		if (check_end_simulation(table))
 			break ;
 		if (table->nbr_limits_meals > 0 && philo_satisfied())
@@ -48,7 +48,7 @@ void	*control(void *null)
 	return (NULL);
 }
 
-void	check_philosophers(t_table *table)
+void	check_philosopher_death(t_table *table)
 {
 	long	current_time;
 	int		i;
@@ -57,7 +57,7 @@ void	check_philosophers(t_table *table)
 	while (++i < table->philo_nbr)
 	{
 		current_time = get_time();
-		if (check_philo_death(&(table->philo[i]),
+		if (is_death(&(table->philo[i]),
 				current_time, table->time_to_die))
 		{
 			pthread_mutex_lock(&table->end_simulation_mutex);
@@ -68,7 +68,7 @@ void	check_philosophers(t_table *table)
 	}
 }
 
-static bool	check_philo_death(t_philo *philo,
+static bool	is_death(t_philo *philo,
 	long current_time, long time_to_die)
 {
 	long	time_since_last_meal;
